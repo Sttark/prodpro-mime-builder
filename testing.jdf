@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JDF xmlns="http://www.CIP4.org/JDFSchema_1_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Activation="Active" ID="JDF001" JobID="Print Quality Draft 002" JobPartID="IDP" Status="Ready" Type="Combined" Types="LayoutPreparation DigitalPrinting" Version="1.2" xsi:schemaLocation="http://www.CIP4.org/JDFSchema_1_1 file:/C:/users/shiebert/Projects/CIP4/Working%20Groups/Schema%20Maintenance/JDFSchema/Version_1_3/JDF.xsd">
+    <ResourcePool>
+        <!--
+            The following InterpretingParams resource specifies that the output is to be in reverse polarity, i.e., a
+            negative image.
+        -->
+        <InterpretingParams Class="Parameter" ID="IP001" PrintQuality="Draft" Status="Available" />
+
+        <!--
+                        The RunList below identifies an 8 page document.
+                -->
+        <RunList Class="Parameter" ID="RL001" NPage="8" Status="Available">
+            <LayoutElement>
+                <FileSpec MimeType="application/pdf" URL="cid:testingfile" />
+            </LayoutElement>
+        </RunList>
+        <!--
+                        The LayoutPreparationParams below specifies duplex (two sided) printing flipped about the X-axis (like a
+                        book) aka "head to head".
+                -->
+        <LayoutPreparationParams Class="Parameter" ID="LPP001" Sides="TwoSidedFlipX" Status="Available" />
+
+        <!--
+                        The Media resource below identifies the  named substrate.
+                -->
+        <Media Class="Consumable" ID="Content" Status="Available" StockType="Content" />
+        <!--
+            The DigitalPrintingParams resource below provides no additional information.  It is required by JDF
+            due to the DigitalPrinting process listed in the Types attribute of the JDF node.
+        -->
+        <DigitalPrintingParams Class="Parameter" ID="DPP001" Status="Available" />
+        <!--
+                        The Component resource identifies the final result of printing.
+                -->
+        <Component Class="Quantity" ComponentType="FinalProduct" ID="C001" Status="Unavailable" />
+    </ResourcePool>
+    <ResourceLinkPool>
+        <InterpretingParamsLink rRef="IP001" Usage="Input" />
+        <RunListLink rRef="RL001" Usage="Input" />
+        <LayoutPreparationParamsLink rRef="LPP001" Usage="Input" />
+        <MediaLink rRef="Content" Usage="Input" />
+        <DigitalPrintingParamsLink rRef="DPP001" Usage="Input" />
+        <ComponentLink Amount="502" rRef="C001" Usage="Output" />
+    </ResourceLinkPool>
+</JDF>

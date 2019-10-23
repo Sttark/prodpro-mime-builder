@@ -1,0 +1,21 @@
+{
+  "name": "prodpro-mime-builder",
+  "version": "0.8.0",
+  "description": "MIME Packager for Production Pro",
+  "main": "index.js",
+  "dependencies": {
+    "nodemailer": "^6.3.1",
+    "xmlbuilder": "^13.0.2"
+  },
+  "devDependencies": {},
+  "author": "Michael Oostdyk",
+  "license": "MIT License",
+  "prettier": {
+    "tabWidth": 4,
+    "printWidth": 100,
+    "singleQuote": true,
+    "insertPragma": true,
+    "jsxBracketSameLine": true,
+    "bracketSpacing": false
+  }
+}
