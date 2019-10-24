@@ -19,7 +19,7 @@ module.exports.createTicket = fileId => {
         .create('JDF')
         .att('xmlns', 'http://www.CIP4.org/JDFSchema_1_1')
         .att('ID', 'JDF005')
-        .att('JobID', 'ANOTHER TEST 5')
+        .att('JobID', 'ANOTHER TEST 7')
         .att('Status', 'Ready')
         .att('Type', 'Combined')
         .att('Types', 'LayoutPreparation DigitalPrinting');
@@ -29,7 +29,6 @@ module.exports.createTicket = fileId => {
         .ele('RunList', {
             Class: 'Parameter',
             ID: 'RL001',
-            NPage: 8,
             Status: 'Available'
         })
         .ele('LayoutElement')
@@ -37,12 +36,6 @@ module.exports.createTicket = fileId => {
             MimeType: 'application/pdf',
             URL: `cid:${fileId}`
         });
-
-    resourcePool.ele('DigitalPrintingParams', {
-        Class: 'Parameter',
-        ID: 'DPP001',
-        Status: 'Available'
-    });
 
     resourcePool.ele('Component', {
         Class: 'Quantity',
@@ -54,8 +47,7 @@ module.exports.createTicket = fileId => {
     const resourceLinkPool = JDF.ele('ResourceLinkPool');
 
     resourceLinkPool.ele('RunListLink', {rRef: 'RL001', Usage: 'Input'});
-    resourceLinkPool.ele('DigitalPrintingParamsLink', {rRef: 'DPP001', Usage: 'Input'});
-    resourceLinkPool.ele('ComponentLink', {Amount: '508', rRef: 'C001', Usage: 'Output'});
+    resourceLinkPool.ele('ComponentLink', {Amount: '510', rRef: 'C001', Usage: 'Output'});
 
     return JDF.end({pretty: true});
 };
