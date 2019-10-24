@@ -6,65 +6,16 @@ const fs = require('fs');
 const path = require('path');
 const xmlbuilder = require('xmlbuilder');
 const MimeNode = require('nodemailer/lib/mime-node');
+const {createMessage, createTicket} = require('./functions');
 
 const jdfId = 'jdffileid';
 const fileId = 'testingfile';
 
-// Build our simple JMF Message
-const JMF_MESSAGE = xmlbuilder
-    .create('JMF')
-    .att('xmlns', 'http://www.CIP4.org/JDFSchema_1_1')
-    .ele('Command', {ID: 'make-me-a-sandwich', Type: 'SubmitQueueEntry'})
-    .ele('QueueSubmissionParams', {
-        ReturnJMF: 'www.frontierlabel.com',
-        URL: `cid:${jdfId}`
-    })
-    .end({pretty: true});
-
-const JDF = xmlbuilder
-    .create('JDF')
-    .att('xmlns', 'http://www.CIP4.org/JDFSchema_1_1')
-    .att('ID', 'JDF005')
-    .att('JobID', 'ANOTHER TEST 5')
-    .att('Status', 'Ready')
-    .att('Type', 'Combined')
-    .att('Types', 'LayoutPreparation DigitalPrinting');
-
-const resourcePool = JDF.ele('ResourcePool');
-resourcePool
-    .ele('RunList', {
-        Class: 'Parameter',
-        ID: 'RL001',
-        NPage: 8,
-        Status: 'Available'
-    })
-    .ele('LayoutElement')
-    .ele('FileSpec', {
-        MimeType: 'application/pdf',
-        URL: `cid:${fileId}`
-    });
-
-resourcePool.ele('DigitalPrintingParams', {
-    Class: 'Parameter',
-    ID: 'DPP001',
-    Status: 'Available'
-});
-
-resourcePool.ele('Component', {
-    Class: 'Quantity',
-    ComponentType: 'FinalProduct',
-    ID: 'C001',
-    Status: 'Unavailable'
-});
-
-const resourceLinkPool = JDF.ele('ResourceLinkPool');
-
-resourceLinkPool.ele('RunListLink', {rRef: 'RL001', Usage: 'Input'});
-resourceLinkPool.ele('DigitalPrintingParamsLink', {rRef: 'DPP001', Usage: 'Input'});
-resourceLinkPool.ele('ComponentLink', {Amount: '508', rRef: 'C001', Usage: 'Output'});
-
-const JDF_TICKET = JDF.end({pretty: true});
-
+// Create the JMF Message
+const JMF_MESSAGE = createMessage(jdfId);
+// Create the Job Ticket
+const JDF_TICKET = createTicket(fileId);
+// Get our file content
 const FILECONTENT = fs.readFileSync('./testing.pdf');
 
 const nodes = [
@@ -103,9 +54,13 @@ const nodes = [
     }
 ];
 
+/**
+ * Create a primary node for the whole package
+ * Loop through our children and add them as nodes to the package
+ * Write the package to a file
+ * @returns {Promise<void>}
+ */
 async function main() {
-    // There is no way to set the contentType Manually for the parent
-    // So I have to do this manually
     const boundary = 'somesillystufffrontier';
     const node = await new MimeNode('multipart/related', {
         baseBoundary: boundary
@@ -116,9 +71,7 @@ async function main() {
         });
 
         childNode.addHeader(attachment.headers);
-
         attachment.content = Buffer.from(attachment.content, 'utf8');
-
         childNode.setContent(attachment.content);
     });
 
