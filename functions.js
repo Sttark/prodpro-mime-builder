@@ -8,7 +8,7 @@ module.exports.createMessage = jdfId => {
         .att('xmlns', 'http://www.CIP4.org/JDFSchema_1_1')
         .ele('Command', {ID: 'make-me-a-sandwich', Type: 'SubmitQueueEntry'})
         .ele('QueueSubmissionParams', {
-            ReturnJMF: 'www.frontierlabel.com',
+            // ReturnJMF: 'www.frontierlabel.com',
             URL: `cid:${jdfId}`
         })
         .end({pretty: true});

@@ -24,3 +24,8 @@ This will generate the file `test.mjm`. This file can be submitted to the DFE ei
 
 If all went well, you should see the job in your queue on the DFE. If not, the DFE tends to have helpful error response messages
 
+### Alternate FileSpec
+
+* If you do not want to send a full MIME package, specify an accessible file
+* `<FileSpec MimeType="application/pdf" URL="file://192.168.2.225/Public-1/Graphics/Artwork/G/G2 CBD/IO#113460/Press Files/113460-GC-FF01-2SKU.pdf" />`
+* `file://Commodore64//Public-1` is acceptable format assuming you have a networked drive named `Commodore64`
