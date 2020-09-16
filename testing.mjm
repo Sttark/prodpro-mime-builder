@@ -1,7 +1,8 @@
 Content-Type: multipart/related;
  boundary="--_NmP-somesillystufffrontier-Part_1"
-Date: Thu, 24 Oct 2019 17:59:20 +0000
-Message-ID: <850bf997-5656-9301-00cf-24314d2028c6@frontiermbp.local>
+Date: Wed, 16 Sep 2020 12:46:51 +0000
+Message-ID:
+ <407178b5-99d3-6f2f-402a-88adba3f6762@Michaels-MacBook-Pro.local>
 MIME-Version: 1.0
 
 ----_NmP-somesillystufffrontier-Part_1
@@ -24,6 +25,7 @@ Content-Disposition: attachment; filename=testing.jdf
 
 <?xml version="1.0"?>
 <JDF xmlns="http://www.CIP4.org/JDFSchema_1_1" ID="JDF005" JobID="ANOTHER TEST 7" Status="Ready" Type="Combined" Types="LayoutPreparation DigitalPrinting">
+  <Comment Name="JobSpec">Galaxy Estate 4</Comment>
   <ResourcePool>
     <RunList Class="Parameter" ID="RL001" Status="Available">
       <LayoutElement>

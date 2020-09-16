@@ -24,6 +24,9 @@ module.exports.createTicket = fileId => {
         .att('Type', 'Combined')
         .att('Types', 'LayoutPreparation DigitalPrinting');
 
+    const commment = JDF.ele('Comment', 'Galaxy Estate 4');
+    commment.att('Name', 'JobSpec');
+
     const resourcePool = JDF.ele('ResourcePool');
     resourcePool
         .ele('RunList', {
