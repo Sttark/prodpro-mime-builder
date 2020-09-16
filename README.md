@@ -13,6 +13,8 @@ Eventually you would have a more robust JDF module so you could configure specif
 * Run `npm i` fromn the project root
 * Run `node index.js` from the project root
 
+**Note the `<Comment name="JobSpec">Galaxy Estate 4</Comment>` element. This assumes you have an internet input method defined on the DFE with that name**
+
 This will generate the file `test.mjm`. This file can be submitted to the DFE either via hotfolder or HTTP.
 
 * Using Postman Submit at `POST` request to your local DFE `http://<dfeipaddress>:8080/dpp/jmf/<dfename>`
