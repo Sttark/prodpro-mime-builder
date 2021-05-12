@@ -4,7 +4,7 @@
   "description": "MIME Packager for Production Pro",
   "main": "index.js",
   "dependencies": {
-    "nodemailer": "^6.3.1",
+    "nodemailer": "^6.4.16",
     "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {},
